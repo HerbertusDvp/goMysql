@@ -1,7 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"goMysql/handlers"
+)
+
+var pln = fmt.Println
 
 func main() {
-	fmt.Println("Hola mundo con p")
+	//Todos los clientes
+	pln("Lista de todos los clientes: \n")
+
+	handlers.Listar()
+
+	pln("\nListado de clientes por ID: \n")
+
+	handlers.ListaById(2)
+
 }
