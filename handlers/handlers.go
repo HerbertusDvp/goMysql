@@ -120,24 +120,67 @@ func Menu() {
 	pln("3. Registrar cliente")
 	pln("4. Modificar cliente")
 	pln("5. Eliminar cliente")
+	pln("6. Salir")
 
 	if scanner.Scan() {
-		for {
-			if scanner.Text() == "1" {
-				Listar()
-				return
-			}
-			if scanner.Text() == "2" {
-				p("Ingresa el id del cliente: ")
-				if scanner.Scan() {
-					id, _ = strconv.Atoi(scanner.Text())
-				}
-				ListaById(id)
-				return
-			}
-			if scanner.Text() == "3" {
 
+		if scanner.Text() == "1" {
+			Listar()
+
+		} else if scanner.Text() == "2" {
+			p("Ingresa el id del cliente: ")
+			if scanner.Scan() {
+				id, _ = strconv.Atoi(scanner.Text())
 			}
+			ListaById(id)
+
+		} else if scanner.Text() == "3" {
+			p("Ingresa un nombre: ")
+			if scanner.Scan() {
+				nombre = scanner.Text()
+			}
+			p("Ingresa el correo: ")
+			if scanner.Scan() {
+				correo = scanner.Text()
+			}
+			p("Ingresa el teléfono: ")
+			if scanner.Scan() {
+				telefono = scanner.Text()
+			}
+
+			cliente := modelos.Cliente{Nombre: nombre, Correo: correo, Telefono: telefono}
+			Insertar(cliente)
+
+		} else if scanner.Text() == "4" {
+			p("Ingresa el id:")
+			if scanner.Scan() {
+				id, _ = strconv.Atoi(scanner.Text())
+			}
+			p("Ingresa el nombre: ")
+			if scanner.Scan() {
+				nombre = scanner.Text()
+			}
+			p("Ingresa el correo: ")
+			if scanner.Scan() {
+				correo = scanner.Text()
+			}
+			p("Ingresa el telefono:")
+			if scanner.Scan() {
+				telefono = scanner.Text()
+			}
+			cliente := modelos.Cliente{Nombre: nombre, Correo: correo, Telefono: telefono}
+			Actualizar(cliente, id)
+
+		} else if scanner.Text() == "5" {
+			p("Ingresa el id del cliente a leiminar: ")
+			if scanner.Scan() {
+				id, _ = strconv.Atoi(scanner.Text())
+			}
+			Eliminar(id)
+		} else if scanner.Text() == "6" {
+			pln("Saliendo ...")
+			return
 		}
+		Menu()
 	}
 }
